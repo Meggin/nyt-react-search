@@ -4,9 +4,10 @@ var React = require("react");
 var Search = require("./Search");
 
 var Saved = require("./Saved");
+
 // Create the Main component.
-// This will change as we build the proper app.
 var Main = React.createClass({
+  // Describe Main Component's render method
   render: function() {
     return (
       <div className="container">

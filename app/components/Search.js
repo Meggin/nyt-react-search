@@ -1,46 +1,51 @@
 // Include React
 var React = require("react");
 
+// Include Search sub-components.
+var Query = require("./Query");
+var Results = require("./Results")
+
+// Helper for making AJAX requests.
+var helpers = require("./utils/helpers");
+
 // Create the Search component.
 var Search = React.createClass({
+
+	// Set initial state of search criteria.
+	getInitialState: function() {
+		return {
+			searchTerm: "",
+			results: [],
+		}
+	},
+
+	// If the component changes, i.e. if search query submitted
+	componentDidUpdate : function() {
+
+		// Run the article query for the search term
+		helpers.runQuery(this.state.searchTerm).then(function(data) {
+			console.log("Search results: " + data);
+			this.setState({ results: data});
+		}.bind(this));
+	},
+
+	// Allows children (sub-components) to update parent component.
+	setTerm: function(term) {
+		this.setState({ searchTerm: term });
+	},
+
 	render: function() {
 		return (
-			<div>
+			<div className="col-md-12">
 		    	<div className="row">
-						<div className="col-sm-12">
-						<div className="panel panel-primary">
-		        			<div className="panel-heading">
-		          				<h3 className="panel-title">Search</h3>
-		        			</div>
-		        			<div className="panel-body">
-		          				<form role="form">
-		            				<div className="form-group">
-		              					<label for="search">Topic</label>
-		              					{/*<input type="text" class="form-control" id="search-term">*/}
-		            				</div>
-		            				<div className="form-group">
-		             					<label for="start-year">Start Year</label>
-		              					{/*<input type="text" class="form-control" id="start-year">*/}
-		            				</div>
-		            				<div className="form-group">
-		             	 				<label for="end-year">End Year</label>
-		              					{/*<input type="text" class="form-control" id="end-year">*/}
-		            				</div>
-		            				<button type="submit" className="btn btn-default" id="run-search">Search</button>
-		          				</form>
-		        			</div>
-		      			</div>
+					<div className="col-sm-12">
+						<Query setTerm={this.setTerm} />
 					</div>
 				</div>
 		      	<div className="row">
-						<div className="col-sm-12">
-						<div className="panel panel-primary">
-		  					<div className="panel-heading">
-		    					<h3 className="panel-title">Results</h3>
-		  					</div>
-		  					<div className="panel-body" id="well-section"></div>
-						</div>
-						</div>
+					<div className="col-sm-12">
+						<Results results={this.state.results} />
+					</div>
 			  	</div>
 			</div>
     	);
