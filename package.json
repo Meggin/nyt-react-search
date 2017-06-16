@@ -19,6 +19,10 @@
   "homepage": "https://github.com/Meggin/nyt-react-search#readme",
   "dependencies": {
     "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.6",
+    "morgan": "^1.8.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3"
   },

@@ -20,6 +20,18 @@ var helper = {
 				return "";
 			}
 		});
+	},
+
+	getSaved: function() {
+		return axios.get("/api/saved");
+	},
+
+	saveArticle: function(article) {
+		return axios.post("/api/saved", {
+			title: article.headline.main
+			//date: date,
+			//url: url
+		});
 	}
 };
 

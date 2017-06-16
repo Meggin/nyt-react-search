@@ -16,18 +16,15 @@ var Main = React.createClass({
       		<p>Search for and annotate articles of interest!</p>
      	  </div>
         <div className="row">
-          <div className="col-md-12">
-            <Search />
-          </div>
+          <Search />
         </div>
         <div className="row">
-          <div className="col-md-12">
-            <Saved />
-          </div>
+          <Saved />
         </div>
       </div>
     );
   }
 });
+
 // Export the component back for use in other files
 module.exports = Main;
